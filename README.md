@@ -7,6 +7,14 @@
 
 An institutional-grade, autonomous cryptocurrency paper trading agent written in **Go 1.23+**. Combines high-throughput market data ingestion from Binance WebSocket, episodic RAG memory via PostgreSQL `pgvector`, quantitative technical indicators (in-house RSI, EMA, MACD), LLM cognitive decision loops (GPT-4o-mini / Claude 3.5), simulated paper execution with slippage/fees, and Prometheus/Grafana mission control.
 
+---
+
+## 🎬 Live Walkthrough Demo Video
+
+![Live Agentic Walkthrough Demo](demo_walkthrough.gif)
+
+> 📹 **High-Definition Video File**: [`demo_walkthrough.mp4`](demo_walkthrough.mp4) (22 seconds, 1280x720 HD walkthrough showing Binance WS Ingestion, Technical Analysis Perception, pgvector RAG memory search, LLM cognition, and Paper Trading Order Execution).
+
 Engineered with **Clean Architecture**, deterministic concurrency patterns, and production-grade resilience (Circuit Breaker, time-ordered UUIDv7, exponential backoff with full jitter).
 
 ---
