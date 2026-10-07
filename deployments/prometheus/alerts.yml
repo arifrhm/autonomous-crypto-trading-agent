@@ -1,0 +1,29 @@
+groups:
+  - name: crypto_agent_alerts
+    rules:
+      - alert: LLMCircuitBreakerTripped
+        expr: increase(llm_calls_total{status="circuit_broken"}[5m]) > 0
+        for: 1m
+        labels:
+          severity: critical
+        annotations:
+          summary: "LLM Provider Circuit Breaker has tripped"
+          description: "LLM client errors exceeded threshold, blocking outgoing calls for 5 minutes."
+
+      - alert: LLMHighErrorRate
+        expr: sum(rate(llm_calls_total{status="error"}[5m])) / sum(rate(llm_calls_total[5m])) > 0.05
+        for: 2m
+        labels:
+          severity: warning
+        annotations:
+          summary: "LLM error rate exceeds 5%"
+          description: "Over 5% of LLM calls failed in the last 5 minutes."
+
+      - alert: SentimentFetchFailures
+        expr: increase(sentiment_fetch_total{status="fetch_error"}[10m]) > 3
+        for: 5m
+        labels:
+          severity: warning
+        annotations:
+          summary: "CryptoPanic sentiment fetch repeatedly failing"
+          description: "More than 3 sentiment fetch failures in the last 10 minutes."
