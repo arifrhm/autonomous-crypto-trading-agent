@@ -1,0 +1,5 @@
+-- 000001_init.down.sql
+
+DROP TABLE IF EXISTS agent_decisions CASCADE;
+DROP TABLE IF EXISTS trades CASCADE;
+DROP TABLE IF EXISTS price_ticks CASCADE;
