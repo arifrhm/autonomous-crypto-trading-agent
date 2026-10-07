@@ -1,0 +1,24 @@
+app = "crypto-trading-agent"
+primary_region = "sin" # Singapore region for lowest latency to Binance WS
+
+[build]
+  dockerfile = "Dockerfile"
+
+[http_service]
+  internal_port = 8080
+  force_https = true
+  auto_stop_machines = false
+  auto_start_machines = true
+  min_machines_running = 1
+  processes = ["app"]
+
+[[vm]]
+  size = "shared-cpu-1x"
+  memory = "512mb"
+  cpus = 1
+
+[env]
+  APP_ENV = "production"
+  APP_PORT = "8080"
+  TRADING_SYMBOLS = "btcusdt,ethusdt"
+  DATABASE_SSLMODE = "require"
