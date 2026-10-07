@@ -4,7 +4,6 @@ import (
 	"strings"
 	"testing"
 
-	"github.com/arifrhm/autonomous-crypto-trading-agent/internal/agent"
 	"github.com/arifrhm/autonomous-crypto-trading-agent/internal/agent/prompts"
 	"github.com/arifrhm/autonomous-crypto-trading-agent/internal/domain"
 )
@@ -24,10 +23,10 @@ func TestPromptRenderer_RenderTradingPrompts(t *testing.T) {
 	}
 
 	data := prompts.TradingPromptData{
-		Observation: &agent.Observation{
+		Observation: &domain.Observation{
 			Symbol:       "BTCUSDT",
 			CurrentPrice: 65420.50,
-			Indicators: agent.TechnicalIndicators{
+			Indicators: domain.TechnicalIndicators{
 				RSI:        42.5,
 				EMA9:       65300.0,
 				EMA21:      65150.0,
@@ -35,12 +34,12 @@ func TestPromptRenderer_RenderTradingPrompts(t *testing.T) {
 				SignalLine: 10.0,
 				Histogram:  2.5,
 			},
-			Sentiment: agent.SentimentState{
+			Sentiment: domain.SentimentState{
 				Score:     0.65,
 				Label:     "BULLISH",
 				Headlines: []string{"Major ETF institutional inflow hits $500M"},
 			},
-			Position: agent.Position{
+			Position: domain.Position{
 				Quantity:      0.5,
 				AveragePrice:  64000.0,
 				UnrealizedPnL: 710.25,
@@ -89,7 +88,7 @@ func TestPromptRenderer_RenderSentimentAndReflection(t *testing.T) {
 	}
 
 	refPrompt, err := renderer.RenderReflectionUserPrompt(prompts.ReflectionPromptData{
-		ActionResult: &agent.ActionResult{
+		ActionResult: &domain.ActionResult{
 			DecisionID:    "dec-123",
 			Symbol:        "BTCUSDT",
 			Action:        domain.ActionBuy,

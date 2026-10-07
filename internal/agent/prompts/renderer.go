@@ -5,13 +5,12 @@ import (
 	"fmt"
 	"text/template"
 
-	"github.com/arifrhm/autonomous-crypto-trading-agent/internal/agent"
 	"github.com/arifrhm/autonomous-crypto-trading-agent/internal/domain"
 )
 
 // TradingPromptData holds the context variables injected into trading prompts.
 type TradingPromptData struct {
-	Observation       *agent.Observation
+	Observation       *domain.Observation
 	SimilarMemories   []domain.MarketMemory
 	MaxPositionUSD    float64
 	MinConfidence     float64
@@ -25,7 +24,7 @@ type SentimentPromptData struct {
 
 // ReflectionPromptData holds trade execution result and historical context.
 type ReflectionPromptData struct {
-	ActionResult *agent.ActionResult
+	ActionResult *domain.ActionResult
 	RecentTrades []domain.ExecutedTrade
 	WinRate      float64
 	TotalPnL     float64

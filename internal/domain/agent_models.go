@@ -1,9 +1,7 @@
-package agent
+package domain
 
 import (
 	"time"
-
-	"github.com/arifrhm/autonomous-crypto-trading-agent/internal/domain"
 )
 
 // Observation captures the multi-modal state of the market and internal account at a specific point in time.
@@ -11,11 +9,11 @@ type Observation struct {
 	Timestamp     time.Time            `json:"timestamp"`
 	Symbol        string               `json:"symbol"`
 	CurrentPrice  float64              `json:"current_price"`
-	PriceHistory  []domain.PriceTick   `json:"price_history"`
+	PriceHistory  []PriceTick          `json:"price_history"`
 	Indicators    TechnicalIndicators  `json:"indicators"`
 	Sentiment     SentimentState       `json:"sentiment"`
 	Position      Position             `json:"position"`
-	RecentTrades  []domain.ExecutedTrade `json:"recent_trades"`
+	RecentTrades  []ExecutedTrade      `json:"recent_trades"`
 }
 
 // TechnicalIndicators encapsulates in-house computed momentum & trend indicators.
@@ -60,7 +58,7 @@ type RiskAssessment struct {
 type Decision struct {
 	ID             string          `json:"id"`
 	Symbol         string          `json:"symbol"`
-	Action         domain.Action   `json:"action"`          // BUY, SELL, HOLD
+	Action         Action          `json:"action"`          // BUY, SELL, HOLD
 	Quantity       float64         `json:"quantity"`        // Target quantity to trade
 	Confidence     float64         `json:"confidence"`      // Confidence score between 0.0 and 1.0
 	Reasoning      string          `json:"reasoning"`       // Explanation behind the decision
@@ -74,7 +72,7 @@ type ActionResult struct {
 	DecisionID    string    `json:"decision_id"`
 	TradeID       string    `json:"trade_id,omitempty"`
 	Symbol        string    `json:"symbol"`
-	Action        domain.Action `json:"action"`
+	Action        Action    `json:"action"`
 	ExecutedPrice float64   `json:"executed_price"`
 	ExecutedQty   float64   `json:"executed_qty"`
 	Fee           float64   `json:"fee"`

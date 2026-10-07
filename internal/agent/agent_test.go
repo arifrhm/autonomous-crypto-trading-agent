@@ -12,28 +12,28 @@ import (
 // MockAgent implements agent.Agent for isolated testing of pipeline orchestrators.
 type MockAgent struct {
 	ObservedSymbol string
-	DecisionMade   *agent.Decision
-	ActionResult   *agent.ActionResult
+	DecisionMade   *domain.Decision
+	ActionResult   *domain.ActionResult
 }
 
-func (m *MockAgent) Observe(ctx context.Context, symbol string) (*agent.Observation, error) {
+func (m *MockAgent) Observe(ctx context.Context, symbol string) (*domain.Observation, error) {
 	m.ObservedSymbol = symbol
-	return &agent.Observation{
+	return &domain.Observation{
 		Timestamp:    time.Now(),
 		Symbol:       symbol,
 		CurrentPrice: 65000.0,
-		Indicators: agent.TechnicalIndicators{
+		Indicators: domain.TechnicalIndicators{
 			RSI: 45.0,
 		},
-		Position: agent.Position{
+		Position: domain.Position{
 			Symbol:      symbol,
 			CashBalance: 10000.0,
 		},
 	}, nil
 }
 
-func (m *MockAgent) Think(ctx context.Context, obs *agent.Observation) (*agent.Decision, error) {
-	decision := &agent.Decision{
+func (m *MockAgent) Think(ctx context.Context, obs *domain.Observation) (*domain.Decision, error) {
+	decision := &domain.Decision{
 		ID:         "mock-decision-1",
 		Symbol:     obs.Symbol,
 		Action:     domain.ActionBuy,
@@ -45,8 +45,8 @@ func (m *MockAgent) Think(ctx context.Context, obs *agent.Observation) (*agent.D
 	return decision, nil
 }
 
-func (m *MockAgent) Act(ctx context.Context, decision *agent.Decision) (*agent.ActionResult, error) {
-	res := &agent.ActionResult{
+func (m *MockAgent) Act(ctx context.Context, decision *domain.Decision) (*domain.ActionResult, error) {
+	res := &domain.ActionResult{
 		DecisionID:    decision.ID,
 		Symbol:        decision.Symbol,
 		Action:        decision.Action,
@@ -59,7 +59,7 @@ func (m *MockAgent) Act(ctx context.Context, decision *agent.Decision) (*agent.A
 	return res, nil
 }
 
-func (m *MockAgent) Reflect(ctx context.Context, result *agent.ActionResult) error {
+func (m *MockAgent) Reflect(ctx context.Context, result *domain.ActionResult) error {
 	return nil
 }
 
