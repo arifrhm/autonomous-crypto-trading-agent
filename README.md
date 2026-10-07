@@ -15,35 +15,35 @@ Engineered with **Clean Architecture**, deterministic concurrency patterns, and 
 
 ```mermaid
 flowchart TD
-    subgraph Market Data Ingestion
-        BWS[Binance WebSocket Stream] --> Ingest[BinanceClient with Jitter Reconnect]
-        Ingest --> TradeChan[chan domain.Trade Buffer]
-        TradeChan --> Flusher[TickBatchFlusher: 100 ticks / 1s]
-        Flusher --> PG_Ticks[(PostgreSQL: price_ticks via CopyFrom)]
+    subgraph MarketIngestion["Market Data Ingestion"]
+        BWS["Binance WebSocket Stream"] --> Ingest["BinanceClient with Jitter Reconnect"]
+        Ingest --> TradeChan["chan domain.Trade Buffer"]
+        TradeChan --> Flusher["TickBatchFlusher: 100 ticks / 1s"]
+        Flusher --> PG_Ticks[("PostgreSQL: price_ticks via CopyFrom")]
     end
 
-    subgraph News & Episodic Memory (RAG)
-        CP[CryptoPanic News API] --> SentFetcher[SentimentFetcher Worker]
-        SentFetcher --> Embedder[OpenAI text-embedding-3-small]
-        Embedder --> VecDB[(PostgreSQL 16: pgvector HNSW Index)]
-        SentFetcher --> RedisCache[(Redis 7: sentiment:symbol)]
+    subgraph EpisodicMemory["News and Episodic Memory RAG"]
+        CP["CryptoPanic News API"] --> SentFetcher["SentimentFetcher Worker"]
+        SentFetcher --> Embedder["OpenAI text-embedding-3-small"]
+        Embedder --> VecDB[("PostgreSQL 16: pgvector HNSW Index")]
+        SentFetcher --> RedisCache[("Redis 7: sentiment:symbol")]
     end
 
-    subgraph Agentic Cognitive Loop
-        Obs[Observe: Market Price, In-House TA, Sentiment, Position] --> Think[Think: Vector RAG Retrieval + LLM Brain]
-        Think --> Guardrails{Risk Guardrails: RSI, Max Position, Min Confidence}
-        Guardrails -->|Approved| Act[Act: PaperEngine with Slippage & Fees]
-        Guardrails -->|Rejected| Hold[Action: HOLD with Audit Reason]
-        Act --> DecisionAudit[(PostgreSQL: agent_decisions)]
-        Act --> TradeLog[(PostgreSQL: trades)]
-        Act --> Reflect[Reflect: Meta-Learning & Self-Improvement]
+    subgraph AgenticLoop["Agentic Cognitive Loop"]
+        Obs["Observe: Market Price, In-House TA, Sentiment, Position"] --> Think["Think: Vector RAG Retrieval + LLM Brain"]
+        Think --> Guardrails{"Risk Guardrails: RSI, Max Position, Min Confidence"}
+        Guardrails -->|Approved| Act["Act: PaperEngine with Slippage and Fees"]
+        Guardrails -->|Rejected| Hold["Action: HOLD with Audit Reason"]
+        Act --> DecisionAudit[("PostgreSQL: agent_decisions")]
+        Act --> TradeLog[("PostgreSQL: trades")]
+        Act --> Reflect["Reflect: Meta-Learning and Self-Improvement"]
         Reflect --> VecDB
     end
 
-    subgraph Observability
-        Agent[Agent Runtime] --> Prom[Prometheus Metrics :8080/metrics]
-        Prom --> Grafana[Grafana Mission Control Dashboard]
-        Prom --> Alerts[Alerting Rules: Circuit Breaker & High Latency]
+    subgraph ObservabilityStack["Observability"]
+        Agent["Agent Runtime"] --> Prom["Prometheus Metrics :8080/metrics"]
+        Prom --> Grafana["Grafana Mission Control Dashboard"]
+        Prom --> Alerts["Alerting Rules: Circuit Breaker and High Latency"]
     end
 ```
 
