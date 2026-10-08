@@ -9,11 +9,17 @@ An institutional-grade, autonomous cryptocurrency paper trading agent written in
 
 ---
 
-## 🎬 Live Walkthrough Demo Video
+## 🎬 Live Walkthrough Demos (CLI & Web UI)
 
+### 1. Web UI Mission Control Walkthrough
+![Web UI Mission Control Walkthrough](demo_ui_walkthrough.gif)
+
+> 📹 **High-Definition Web UI Video**: [`demo_ui_walkthrough.mp4`](demo_ui_walkthrough.mp4) (1280x720 HD video showing real-time WebSocket tick rate, mark-to-market dynamic equity curves, live order placement with UUIDv7, and LLM cognitive reasoning audit trail).
+
+### 2. Backend Agent Engine CLI Walkthrough
 ![Live Agentic Walkthrough Demo](demo_walkthrough.gif)
 
-> 📹 **High-Definition Video File**: [`demo_walkthrough.mp4`](demo_walkthrough.mp4) (22 seconds, 1280x720 HD walkthrough showing Binance WS Ingestion, Technical Analysis Perception, pgvector RAG memory search, LLM cognition, and Paper Trading Order Execution).
+> 📹 **High-Definition Engine Video**: [`demo_walkthrough.mp4`](demo_walkthrough.mp4) (1280x720 HD walkthrough showing Binance WS Ingestion, Technical Analysis Perception, pgvector RAG memory search, LLM cognition, and Paper Trading Order Execution).
 
 Engineered with **Clean Architecture**, deterministic concurrency patterns, and production-grade resilience (Circuit Breaker, time-ordered UUIDv7, exponential backoff with full jitter).
 
