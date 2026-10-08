@@ -23,6 +23,8 @@ An institutional-grade, autonomous cryptocurrency paper trading agent written in
 
 Engineered with **Clean Architecture**, deterministic concurrency patterns, and production-grade resilience (Circuit Breaker, time-ordered UUIDv7, exponential backoff with full jitter).
 
+> 📖 **Comprehensive Project & UI Brief**: Read [`PROJECT_BRIEF.md`](PROJECT_BRIEF.md) for full architectural specifications, Next.js Web UI design requirements, and engineering trade-off evaluations.
+
 ---
 
 ## 🏗️ Architecture Overview
