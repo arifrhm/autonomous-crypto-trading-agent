@@ -62,10 +62,10 @@ func main() {
 	log, _ := logger.New("development", "info")
 	defer func() { _ = log.Sync() }()
 
-	fmt.Println("\n==========================================================================")
+	fmt.Println("==========================================================================")
 	fmt.Println("🚀 AUTONOMOUS CRYPTO TRADING AGENT - LIVE WALKTHROUGH DEMO")
 	fmt.Println("   Binance WS Ingestion • pgvector RAG • LLM Brain • Paper Execution")
-	fmt.Println("==========================================================================\n")
+	fmt.Println("==========================================================================")
 
 	// 1. Setup in-memory episodic memory (pgvector mock)
 	memStore := &demoMemoryStore{
@@ -193,7 +193,7 @@ func main() {
 	finalBal := paper.GetBalance()
 	fmt.Printf("   -> Final Cash Balance: $%.2f USDT (Net Growth: +$%.2f)\n", finalBal.CashUSDT, finalBal.CashUSDT-10000.0)
 
-	fmt.Println("\n==========================================================================")
+	fmt.Println("==========================================================================")
 	fmt.Println("✅ WALKTHROUGH DEMO COMPLETED SUCCESSFULLY!")
-	fmt.Println("==========================================================================\n")
+	fmt.Println("==========================================================================")
 }

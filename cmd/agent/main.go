@@ -16,6 +16,7 @@ import (
 	"github.com/redis/go-redis/v9"
 	"go.uber.org/zap"
 
+	"github.com/arifrhm/autonomous-crypto-trading-agent/internal/agent"
 	"github.com/arifrhm/autonomous-crypto-trading-agent/internal/config"
 	"github.com/arifrhm/autonomous-crypto-trading-agent/internal/ingestion"
 	"github.com/arifrhm/autonomous-crypto-trading-agent/internal/storage/postgres"
@@ -140,9 +141,19 @@ func main() {
 		}()
 	}
 
-	// 8. Setup HTTP Server (/health & /metrics)
+	// 8. Setup HTTP Server (/health, /metrics, /api/telemetry)
+	var tradeRepo postgres.TradeRepository
+	var decisionRepo postgres.DecisionRepository
+	if pgPool != nil {
+		tradeRepo = postgres.NewTradeRepository(pgPool)
+		decisionRepo = postgres.NewDecisionRepository(pgPool)
+	}
+
+	telemetryHandler := agent.NewTelemetryHandler(pgPool, rdb, tradeRepo, decisionRepo, priceRepo, log)
+
 	mux := http.NewServeMux()
 	mux.Handle("/metrics", promhttp.Handler())
+	mux.Handle("/api/telemetry", telemetryHandler)
 	mux.HandleFunc("/health", func(w http.ResponseWriter, r *http.Request) {
 		status := map[string]any{
 			"status":    "healthy",

@@ -97,6 +97,7 @@ web/
 | **Episodic Memory** | PostgreSQL 16 **`pgvector`** | Menggunakan index HNSW (`vector_cosine_ops`) langsung di PostgreSQL, memberikan kapabilitas vector search ACID tanpa perlu database eksternal terpisah (seperti Pinecone/Qdrant). |
 | **LLM Resilience** | **Circuit Breaker + Redis Cache** | Menghentikan panggilan ke API provider jika error > 5x dalam 1 menit. Cache prompt `SHA256` memotong biaya token hingga **80%** di pasar sideways. |
 | **Technical Analysis** | **In-house Pure Go** | Menghitung RSI, EMA, dan MACD secara independen dengan algoritma deterministik matematis tanpa ketergantungan library pihak ketiga. |
+| **Mission Control UI** | **Next.js 14 + Recharts** | Dashboard modern yang terhubung real-time ke backend Go (`/api/telemetry`), memvisualisasikan kurva ekuitas, trade execution log, dan status guardrails. |
 | **Container Runtime** | **Multi-stage Distroless** | Menghasilkan image container minimalis berukuran kecil (<40MB) tanpa shell, berjalan di bawah *non-root user* untuk keamanan produksi maksimal. |
 
 ---

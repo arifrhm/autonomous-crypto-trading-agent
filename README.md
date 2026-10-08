@@ -120,6 +120,19 @@ go run cmd/backtest/main.go --symbol BTCUSDT --candles 8760
 ```
 Outputs `backtest_report.json` and `backtest_trades.csv`.
 
+### 5. Launch Next.js Mission Control Web UI
+The web dashboard connects directly to the Go backend's `/api/telemetry` endpoint:
+```bash
+cd web
+npm install
+npm run dev
+```
+Open [http://localhost:3000](http://localhost:3000) to view live real-time equity curves, pgvector RAG decisions, and executed trades.
+Optionally specify backend target via environment variable:
+```bash
+NEXT_PUBLIC_BACKEND_URL=http://localhost:8080/api/telemetry npm run dev
+```
+
 ---
 
 ## 📊 Observability & Metrics

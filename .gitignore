@@ -27,3 +27,14 @@ coverage.html
 # Docker volumes / local data
 data/
 tmp/
+
+# Frontend Node / Next.js
+web/node_modules/
+web/.next/
+web/out/
+web/package-lock.json
+
+# Walkthrough video generators
+generate_video.py
+generate_ui_video.py
+
